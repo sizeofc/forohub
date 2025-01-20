@@ -20,7 +20,7 @@ public class Topico {
     private LocalDateTime fechaCreacion;
     private Boolean status;
     private String autor;
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "curso_id", nullable = false) // Clave foránea hacia Curso
     private Curso curso;
 
