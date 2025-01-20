@@ -2,6 +2,7 @@ package com.jonatan.forohub.domain.topico;
 
 import com.jonatan.forohub.domain.curso.Curso;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.Data;
 
 
@@ -72,5 +73,15 @@ public class Topico {
 
     public LocalDateTime getFechaCreacion(){
         return this.fechaCreacion;
+    }
+
+    public void modificar(@Valid DatosModificacionTopico datos) {
+        if(datos.titulo()!=null&&!datos.titulo().isEmpty()){
+            this.titulo= datos.titulo();
+        }
+        if(datos.mensaje()!=null&&!datos.mensaje().isEmpty()){
+            this.mensaje= datos.mensaje();
+        }
+
     }
 }

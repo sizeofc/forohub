@@ -27,6 +27,11 @@ public class TratamientoErrores {
         return ResponseEntity.badRequest().body("Todos los campos deben estar completos");
     }
 
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity tratarErrorModificacionNoAutorizada(UnauthorizedException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
     private record DatosError(String campo, String mensaje) {
         DatosError(FieldError error) {
             this(error.getField(), error.getDefaultMessage());

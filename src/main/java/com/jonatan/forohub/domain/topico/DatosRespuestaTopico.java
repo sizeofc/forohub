@@ -5,6 +5,7 @@ import com.jonatan.forohub.domain.curso.Curso;
 import java.time.LocalDateTime;
 
 public record DatosRespuestaTopico(
+        Long id,
         String titulo,
         String mensaje,
         String autor,
@@ -12,6 +13,6 @@ public record DatosRespuestaTopico(
         LocalDateTime fechaCreacion
 ) {
     public DatosRespuestaTopico(Topico t) {
-        this(t.getTitulo(), t.getMensaje(), t.getAutor(), t.getCurso().getId(), t.getFechaCreacion());
+        this(t.getId(), t.getTitulo(), t.getMensaje(), t.getAutor(), t.getCurso().getId(), t.getFechaCreacion());
     }
 }
