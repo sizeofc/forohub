@@ -9,6 +9,9 @@
 
 ForoHub es una API RESTful robusta desarrollada como parte de la especialización en Backend Java + Spring Boot de Alura Latam en colaboración con Oracle Next One Education. El proyecto implementa un sistema completo de gestión de foros, siguiendo las mejores prácticas de desarrollo y arquitectura de software.
 
+### API DOCUMENTACION CON SWAGGER
+![Menu Principal](images/DOCUEMNTACION-API.png)
+
 ## ✨ Características Principales
 
 - Arquitectura hexagonal para un código limpio y mantenible
