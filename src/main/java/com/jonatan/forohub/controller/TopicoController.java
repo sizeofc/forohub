@@ -9,6 +9,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.ValidationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -38,12 +40,15 @@ public class TopicoController {
         if (curso == null) {
             throw new ValidationException("EL id del curso es invalido");
         }
-        Topico newtopico = new Topico(topico, curso);
-        System.out.println("nuevo topico creado: " + newtopico.getTitulo() + newtopico.getCurso().getNombre());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+        Topico newtopico = new Topico(topico, curso,currentUsername);
+        newtopico.setAutor(currentUsername);
+
+
 
         newtopico = repository.save(new Topico(newtopico));
 
-        System.out.println(newtopico.toString());
         DatosRespuestaTopico datosRespuestaTopico = new DatosRespuestaTopico(newtopico);
         URI url = uriComponentsBuilder.path("/topico/{id}").buildAndExpand(newtopico.getId()).toUri();
         return ResponseEntity.created(url).body(datosRespuestaTopico);

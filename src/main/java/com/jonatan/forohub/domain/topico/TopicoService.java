@@ -1,7 +1,9 @@
 package com.jonatan.forohub.domain.topico;
 
+import com.jonatan.forohub.domain.PropietarioService;
 import com.jonatan.forohub.infra.errores.UnauthorizedException;
 import jakarta.validation.ValidationException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -11,7 +13,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 @Service
 public class TopicoService {
 
+    @Autowired
     private final TopicoRepository topicRepository;
+    @Autowired
+    PropietarioService propietarioService;
 
     public TopicoService(TopicoRepository topicRepository) {
         this.topicRepository = topicRepository;

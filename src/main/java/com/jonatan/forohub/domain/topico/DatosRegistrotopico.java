@@ -9,12 +9,12 @@ import jakarta.validation.constraints.NotNull;
 public record DatosRegistrotopico(
         @NotBlank String titulo,
         @NotBlank String mensaje,
-        @NotBlank String autor,
         @NotNull DatosCurso curso
 ) {
 
     public DatosRegistrotopico(Topico topico){
 
-        this(topico .getTitulo(), topico.getMensaje(), topico.getAutor(),new DatosCurso(topico.getCurso().getId()));
+        this(topico .getTitulo(), topico.getMensaje(),new DatosCurso(topico.getCurso().getId()));
     }
+
 }

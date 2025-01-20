@@ -24,11 +24,11 @@ public class Topico {
     @JoinColumn(name = "curso_id", nullable = false) // Clave foránea hacia Curso
     private Curso curso;
 
-    public Topico(DatosRegistrotopico datos,Curso curso){
+    public Topico(DatosRegistrotopico datos,Curso curso,String username){
         this.titulo= datos.titulo();
         this.mensaje= datos.mensaje();
         this.fechaCreacion= LocalDateTime.now();
-        this.autor= datos.autor();
+        this.autor= username;
         this.curso= curso;
         this.status=true;
 
@@ -69,6 +69,10 @@ public class Topico {
 
     public Curso getCurso(){
         return this.curso;
+    }
+
+    public void setAutor(String username){
+        this.autor= username;
     }
 
     public LocalDateTime getFechaCreacion(){
