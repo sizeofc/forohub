@@ -1,0 +1,1 @@
+rename table categorias to cursos;

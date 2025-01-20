@@ -1,15 +1,13 @@
 package com.jonatan.forohub.domain.topico;
 
+import com.jonatan.forohub.domain.curso.Curso;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 import java.time.LocalDateTime;
 
 @Data
-@NoArgsConstructor
 @Entity
 @Table(name = "topicos")
 public class Topico {
@@ -21,22 +19,39 @@ public class Topico {
     private LocalDateTime fechaCreacion;
     private Boolean status;
     private String autor;
-    private String curso;
+    @ManyToOne
+    @JoinColumn(name = "curso_id", nullable = false) // Clave foránea hacia Curso
+    private Curso curso;
 
-    public Topico(DatosRegistrotopico datos){
+    public Topico(DatosRegistrotopico datos,Curso curso){
         this.titulo= datos.titulo();
         this.mensaje= datos.mensaje();
         this.fechaCreacion= LocalDateTime.now();
         this.autor= datos.autor();
-        this.curso= datos.curso();
+        this.curso= curso;
         this.status=true;
 
     }
 
     public Topico(){}
 
+    public Topico(Topico newtopico) {
+//        this.id=null;
+        this.titulo= newtopico.getTitulo();
+        this.mensaje= newtopico.getMensaje();
+        this.fechaCreacion= LocalDateTime.now();
+        this.autor= newtopico.getAutor();
+        this.curso= newtopico.getCurso();
+        System.out.println("curso ingresado de newTopico " + newtopico.getCurso().getNombre());
+        this.status=true;
+    }
+
     public Long getId(){
         return this.id;
+    }
+
+    public void setCurso(Curso curso){
+        this.curso=curso;
     }
 
     public String getTitulo(){
@@ -51,7 +66,7 @@ public class Topico {
         return this.autor;
     }
 
-    public String getCurso(){
+    public Curso getCurso(){
         return this.curso;
     }
 
